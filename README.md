@@ -55,4 +55,4 @@ devpulse-dashboard/
 └── package.json
 
 
-![alt text](image.png)
+![Pulse](./src/assets/img/projeto.png)
