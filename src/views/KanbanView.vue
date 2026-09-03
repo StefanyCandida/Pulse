@@ -164,13 +164,14 @@ const priorityBadges = {
     </div>
 
 
-    <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-      <div class="bg-gray-800 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-700 space-y-4">
-        <div class="flex items-center justify-between pb-2 border-b border-gray-700">
-          <h3 class="text-lg font-bold text-white">
+   
+    <div v-if="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-200 dark:border-gray-700 space-y-4">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white">
             {{ isEditing ? 'Editar Tarefa' : 'Criar Nova Tarefa' }}
           </h3>
-          <button @click="closeModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-white">
+          <button @click="closeModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-white cursor-pointer">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -185,7 +186,7 @@ const priorityBadges = {
               type="text"
               required
               placeholder="Ex: Criar componente de formulário"
-              class="w-full px-3.5 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+              class="w-full px-3.5 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
             />
           </div>
 
@@ -195,56 +196,75 @@ const priorityBadges = {
               v-model="form.description"
               rows="3"
               placeholder="Detalhes sobre esta tarefa..."
-              class="w-full px-3.5 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none resize-none"
+              class="w-full px-3.5 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 text-sm focus:ring-2 focus:ring-indigo-500 outline-none resize-none"
             ></textarea>
           </div>
 
-          <div class="grid grid-cols-2 gap-3">
+          
+
+        <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
-              <select
-                v-model="form.status"
-                class="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
-              >
-                <option value="todo">A Fazer</option>
-                <option value="in_progress">Em Andamento</option>
-                <option value="done">Concluído</option>
-              </select>
+              <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">Status</label>
+              <div class="relative">
+                <select
+                  v-model="form.status"
+                  class="w-full appearance-none pl-4 pr-10 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer"
+                >
+                  <option value="todo">A Fazer</option>
+                  <option value="in_progress">Em Andamento</option>
+                  <option value="done">Concluído</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Prioridade</label>
-              <select
-                v-model="form.priority"
-                class="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
-              >
-                <option value="low">Baixa</option>
-                <option value="medium">Média</option>
-                <option value="high">Alta</option>
-              </select>
+              <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">Prioridade</label>
+              <div class="relative">
+                <select
+                  v-model="form.priority"
+                  class="w-full appearance-none pl-4 pr-10 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none cursor-pointer"
+                >
+                  <option value="low">Baixa</option>
+                  <option value="medium">Média</option>
+                  <option value="high">Alta</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Data de Entrega</label>
+            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">Data de Entrega</label>
             <input
               v-model="form.dueDate"
               type="date"
-              class="w-full px-3.5 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+              class="w-full pl-4 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-indigo-500 outline-none dark:[color-scheme:dark] cursor-pointer"
             />
           </div>
+          <div>
+
+</div>
 
           <div class="flex items-center justify-end gap-3 pt-3 border-t border-gray-200 dark:border-gray-700">
             <button
               type="button"
               @click="closeModal"
-              class="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              class="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors shadow-lg shadow-indigo-600/20"
+              class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors shadow-lg shadow-indigo-600/20 cursor-pointer"
             >
               {{ isEditing ? 'Salvar Alterações' : 'Criar Tarefa' }}
             </button>
